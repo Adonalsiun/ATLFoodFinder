@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="{% static 'figma/global.css' %}">
+    <link rel="stylesheet" href="{% static 'figma/filterBar.css' %}">
+      <script type="module" src="{% static '/aff/index.js' %}"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap"
+    />
+
+  </head>
+  <body>
+    <div class="navfilter">
+      <div class="container11">
+        <div class="column21">
+
+
+          <button class="column22">
+            <div class="nav-link21" id="navLinkContainer">
+              <div class="nav-link-dropdown1">
+                <div class="link57">Cuisine</div>
+                <img
+                  class="chevron-down-icon6"
+                  alt=""
+                  src="{% static '' %}./public/tabler--chevron-down.svg"
+                />
+              </div>
+            </div>
+          </button>
+
+          <button class="nav-link22" id="navLink">
+            <div class="nav-link-dropdown2">
+              <div class="link58">Rating</div>
+              <img
+                class="chevron-down-icon7"
+                alt=""
+                src="{% static '' %}./public/tabler--chevron-down.svg"
+              />
+            </div>
+          </button>
+          <button class="nav-link23" id="navLink1">
+            <div class="nav-link-dropdown3">
+              <div class="link59">Distance</div>
+              <img
+                class="chevron-down-icon8"
+                alt=""
+                src="{% static '' %}./public/tabler--chevron-down.svg"
+              />
+            </div>
+          </button>
+          <button class="nav-link24">
+            <div class="nav-link-dropdown4">
+              <div class="link60" onclick="showFavorites()">Favorites</div>
+              <img
+                class="chevron-down-icon9"
+                alt=""
+                src="{% static '' %}./public/tabler--chevron-up.svg"
+              />
+            </div>
+          </button>
+{#          <button class="nav-link24">#}
+{#            <div class="nav-link-dropdown4">#}
+{#              <div class="link60" onclick="clearMarkers()">Clear Markers</div>#}
+{#              <img#}
+{#                class="chevron-down-icon9"#}
+{#                alt=""#}
+{#                src="{% static '' %}./public/chevron-down-1.svg"#}
+{#              />#}
+{#            </div>#}
+{#          </button>#}
+        </div>
+        <div class="column23">
+            <button class="clearOutside" id="clearMarker" onclick="clearMarkersAndFilters()">
+                  <div class="clearInside">Clear Markers</div>
+            </button>
+            <div class="form4">
+                  <input class="text-input15" id="restaurantSearch" placeholder="Search by keyword" type="text" />
+                  <button class ="restaurantButton" id="restaurantButton">Go!</button>
+              </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="cuisinePopup" class="popup-overlay" style="display: none">
+      <div class="cuisine1">
+        <div class="banner-61">
+          <div class="container10">
+            <div class="content93">
+              <img
+                class="icon-relume13"
+                loading="lazy"
+                alt=""
+                src="{% static '' %}./public/food-333.svg"
+              />
+
+              <div class="content94">
+                <div class="heading28">Select your cuisine here!</div>
+                <div class="text36">
+                  Options include: American, Chinese, Cuban, Italian, Japanese,
+                  Korean, Mediterranean, Mexican, Vietnamese, and many more!
+                </div>
+              </div>
+            </div>
+            <div class="content95">
+              <div class="form4">
+                  <input class="text-input15" id="restaurantCuisine" placeholder="Search by cuisine" type="text" />
+                  <button class="restaurantButton" id="cuisineButton">Go!</button>
+
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="ratingsPopup" class="popup-overlay" style="display: none">
+      <div class="ratings">
+        <div class="banner-8">
+          <div class="container8">
+            <div class="content88">
+              <img
+                class="icon-relume11"
+                loading="lazy"
+                alt=""
+                src="{% static '' %}./public/star-73.svg"
+              />
+
+              <div class="content89">
+                <div class="heading26">Select your star rating!</div>
+                <div class="content-description">
+                  Looking for something with a certain quality? Select your star
+                  rating here!
+                </div>
+              </div>
+            </div>
+            <div class="actions10">
+              <div class="buttons3">
+                  <button class="button105" value=5.0 id="restaurantStar5">
+                  <div class="button106">5.0</div>
+                </button>
+                  <button class="button105" value=4.0 id="restaurantStar4">
+                  <div class="button108">4.0</div>
+                </button>
+                  <button class="button105" value=3.0 id="restaurantStar3">
+                  <div class="button110">3.0</div>
+                </button>
+                  <button class="button105" value=2.0 id="restaurantStar2">
+                  <div class="button112">2.0</div>
+                </button>
+                  <button class="button105" value=1.0 id="restaurantStar1">
+                  <div class="button114">1.0</div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="distancePopup" class="popup-overlay" style="display: none">
+      <div class="distance">
+        <div class="banner-6">
+          <div class="container9">
+            <div class="content90">
+                <img
+                class="icon-relume12"
+                loading="lazy"
+                alt=""
+                src="{% static '' %}./public/pin-distance-fill.svg"
+              />
+              <div class="content91">
+                <div class="heading27">
+                  Find restaurants within a certain distance!
+                </div>
+                <div class="paragraph">
+                  Looking for something within your reach? Just enter your
+                  distance here!
+                </div>
+              </div>
+            </div>
+            <div class="content92">
+              <div class="form4">
+                  <input class="text-input13" id="restaurantRadius" placeholder="Distance (km)" type="text" />
+                  <button class="restaurantButton" id="radiusButton">Go!</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+                  <script>
+                      var currentRating = "";
+                      $( document ).ready(function() {
+                      $("#restaurantStar5").click(function() {
+                          if(!(currentRating==="")) {
+                              $(currentRating).removeClass('button-clicked');
+                              $(currentRating).addClass('button105');
+                          }
+                          $("#restaurantStar5").removeClass('button105');
+                         $("#restaurantStar5").addClass('button-clicked');
+                         currentRating="#restaurantStar5"
+                        });
+                      $("#restaurantStar4").click(function() {
+                          if(!(currentRating==="")) {
+                              $(currentRating).removeClass('button-clicked');
+                              $(currentRating).addClass('button105');
+                          }
+                          $("#restaurantStar4").removeClass('button105');
+                         $("#restaurantStar4").addClass('button-clicked');
+                         currentRating="#restaurantStar4"
+                        });
+                      $("#restaurantStar3").click(function() {
+                          if(!(currentRating==="")) {
+                              $(currentRating).removeClass('button-clicked');
+                              $(currentRating).addClass('button105');
+                          }
+                          $("#restaurantStar3").removeClass('button105');
+                         $("#restaurantStar3").addClass('button-clicked');
+                         currentRating="#restaurantStar3"
+                        });
+                      });
+                      $("#restaurantStar2").click(function() {
+                          if(!(currentRating==="")) {
+                              $(currentRating).removeClass('button-clicked');
+                              $(currentRating).addClass('button105');
+                          }
+                          $("#restaurantStar2").removeClass('button105');
+                         $("#restaurantStar2").addClass('button-clicked');
+                         currentRating="#restaurantStar2"
+                        });
+                      $("#restaurantStar1").click(function() {
+                          if(!(currentRating==="")) {
+                              $(currentRating).removeClass('button-clicked');
+                              $(currentRating).addClass('button105');
+                          }
+                          $("#restaurantStar1").removeClass('button105');
+                         $("#restaurantStar1").addClass('button-clicked');
+                         currentRating="#restaurantStar1"
+                        });
+                      $("#clearMarker").click(function() {
+                          $(currentRating).removeClass('button-clicked');
+                          $(currentRating).addClass('button105');
+                        });
+                  </script>
+    <script>
+        var popupicon = document.getElementById("popupicon");
+        if(popupicon) {
+          popupicon.addEventListener("click", function (e) {
+            var popup = e.currentTarget.parentNode;
+            function isOverlay(node) {
+              return !!(node && node.classList && node.classList.contains("popup-overlay"));
+            }
+            while(popup && !isOverlay(popup)) {
+              popup = popup.parentNode;
+            }
+            if(isOverlay(popup)) {
+              popup.style.display = "none";
+            }
+          });
+        }
+
+
+        var popupicon = document.getElementById("popupicon");
+        if(popupicon) {
+          popupicon.addEventListener("click", function (e) {
+            var popup = e.currentTarget.parentNode;
+            function isOverlay(node) {
+              return !!(node && node.classList && node.classList.contains("popup-overlay"));
+            }
+            while(popup && !isOverlay(popup)) {
+              popup = popup.parentNode;
+            }
+            if(isOverlay(popup)) {
+              popup.style.display = "none";
+            }
+          });
+        }
+
+
+        var popupicon = document.getElementById("popupicon");
+        if(popupicon) {
+          popupicon.addEventListener("click", function (e) {
+            var popup = e.currentTarget.parentNode;
+            function isOverlay(node) {
+              return !!(node && node.classList && node.classList.contains("popup-overlay"));
+            }
+            while(popup && !isOverlay(popup)) {
+              popup = popup.parentNode;
+            }
+            if(isOverlay(popup)) {
+              popup.style.display = "none";
+            }
+          });
+        }
+
+/*
+      var navLinkContainer = document.getElementById("navLinkContainer");
+      if(navLinkContainer) {
+        navLinkContainer.addEventListener("click", function () {
+          var popup = document.getElementById("cuisinePopup");
+          if(!popup) return;
+          var popupStyle = popup.style;
+          if(popupStyle) {
+            popupStyle.display = "flex";
+            popupStyle.zIndex = 100;
+            popupStyle.backgroundColor = "rgba(113, 113, 113, 0.3)";
+           popupStyle.alignItems = "center";
+            popupStyle.justifyContent = "center";
+          }
+          popup.setAttribute("closable", "");
+
+          var onClick = popup.onClick || function(e) {
+            if(e.target === popup && popup.hasAttribute("closable")) {
+              popupStyle.display = "none";
+            }
+          };
+          popup.addEventListener("click", onClick);
+        });
+      }
+*/
+document.addEventListener("DOMContentLoaded", function() {
+  var navLinkContainer = document.getElementById('navLinkContainer');
+  var popup = document.getElementById('cuisinePopup');
+
+  if (navLinkContainer && popup) {
+    navLinkContainer.addEventListener('click', function() {
+      // Toggle the visibility of the popup
+      if (popup.style.display === 'none') {
+            popup.style.display = "flex";
+            popup.style.zIndex = 100;
+            popup.style.backgroundColor = "rgba(113, 113, 113, 0.3)";
+            popup.style.alignItems = "center";
+            popup.style.justifyContent = "center";
+      } else {
+        popup.style.display = 'none';
+      }
+    });
+
+    // Close popup when clicked directly on it
+    popup.addEventListener('click', function(e) {
+      if (e.target === popup) {
+        popup.style.display = 'none';
+      }
+    });
+  }
+});
+/*
+      var navLink = document.getElementById("navLink");
+      if(navLink) {
+        navLink.addEventListener("click", function () {
+          var popup = document.getElementById("ratingsPopup");
+          if(!popup) return;
+          var popupStyle = popup.style;
+          if(popupStyle) {
+            popupStyle.display = "flex";
+            popupStyle.zIndex = 100;
+            popupStyle.backgroundColor = "rgba(113, 113, 113, 0.3)";
+           popupStyle.alignItems = "center";
+            popupStyle.justifyContent = "center";
+          }
+          popup.setAttribute("closable", "");
+
+          var onClick = popup.onClick || function(e) {
+            if(e.target === popup && popup.hasAttribute("closable")) {
+              popupStyle.display = "none";
+            }
+          };
+          popup.addEventListener("click", onClick);
+        });
+      }
+
+      var navLink1 = document.getElementById("navLink1");
+      if(navLink1) {
+        navLink1.addEventListener("click", function () {
+          var popup = document.getElementById("distancePopup");
+          if(!popup) return;
+          var popupStyle = popup.style;
+          if(popupStyle) {
+            popupStyle.display = "flex";
+            popupStyle.zIndex = 100;
+            popupStyle.backgroundColor = "rgba(113, 113, 113, 0.3)";
+           popupStyle.alignItems = "center";
+            popupStyle.justifyContent = "center";
+          }
+          popup.setAttribute("closable", "");
+
+          var onClick = popup.onClick || function(e) {
+            if(e.target === popup && popup.hasAttribute("closable")) {
+              popupStyle.display = "none";
+            }
+          };
+          popup.addEventListener("click", onClick);
+        });
+      }
+*/
+
+document.addEventListener("DOMContentLoaded", function() {
+  var navLinkContainer = document.getElementById('navLink');
+  var popup = document.getElementById('ratingsPopup');
+
+  if (navLinkContainer && popup) {
+    navLinkContainer.addEventListener('click', function() {
+      // Toggle the visibility of the popup
+      if (popup.style.display === 'none') {
+            popup.style.display = "flex";
+            popup.style.zIndex = 100;
+            popup.style.backgroundColor = "rgba(113, 113, 113, 0.3)";
+            popup.style.alignItems = "center";
+            popup.style.justifyContent = "center";
+      } else {
+        popup.style.display = 'none';
+      }
+    });
+
+    // Close popup when clicked directly on it
+    popup.addEventListener('click', function(e) {
+      if (e.target === popup) {
+        popup.style.display = 'none';
+      }
+    });
+  }
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+  var navLinkContainer = document.getElementById('navLink1');
+  var popup = document.getElementById('distancePopup');
+
+  if (navLinkContainer && popup) {
+    navLinkContainer.addEventListener('click', function() {
+      // Toggle the visibility of the popup
+      if (popup.style.display === 'none') {
+            popup.style.display = "flex";
+            popup.style.zIndex = 100;
+            popup.style.backgroundColor = "rgba(113, 113, 113, 0.3)";
+            popup.style.alignItems = "center";
+            popup.style.justifyContent = "center";
+      } else {
+        popup.style.display = 'none';
+      }
+    });
+
+    // Close popup when clicked directly on it
+    popup.addEventListener('click', function(e) {
+      if (e.target === popup) {
+        popup.style.display = 'none';
+      }
+    });
+  }
+});
+    </script>
+  </body>
+</html>

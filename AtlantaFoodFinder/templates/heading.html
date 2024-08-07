@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, width=device-width" />
+
+    <link rel="stylesheet" href="{% static 'figma/global.css' %}">
+    <link rel="stylesheet" href="{% static 'figma/Heading.css' %}">
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap"
+    />
+  </head>
+  <body>
+    <div class="heading22">
+      <section class="navbar-91">
+        <div class="content72">
+          <div class="content73">
+            <img
+              class="company-logo-icon7"
+              loading="lazy"
+              alt=""
+              src="{% static '' %}./public/screenshot-20240720-193819-1@2x.png"
+            />
+
+            <div class="column14">
+              <button class="link-one3" id="link1">
+                <div class="link41">Home</div>
+              </button>
+              <button class="link-two3" id="link2">
+                <div class="link42">About</div>
+              </button>
+              <button class="link-three3" id="link3">
+                <div class="link43">Explore</div>
+              </button>
+            <button class="link-three5" id="link5">
+              <div class="link45">Ratings</div>
+            </button>
+            </div>
+          </div>
+          <div class="actions9">
+            {% if user.is_authenticated %}
+                <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="button70" id="button100">
+                        <div class="button71">Logout</div>
+                    </button>
+                </form>
+            {% else %}
+                <a href="{% url 'login' %}" class="button70" id="button100">
+                    <div class="button71">Login</div>
+                </a>
+            {% endif %}
+            {% if user.is_authenticated %}
+                <a href="#" class="button72" id="button400">
+                    <div class="button73">{{ user.username }}</div>
+                </a>
+            {% else %}
+                <a href="{% url 'signup' %}" class="button72" id="button400">
+                    <div class="button73">Register</div>
+                </a>
+            {% endif %}
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script>
+      let link1 = document.getElementById("link1");
+      if(link1) {
+        link1.addEventListener("click", function (e) {
+          window.location.href = "../aff"
+        });
+      }
+
+      let link2 = document.getElementById("link2");
+      if(link2) {
+        link2.addEventListener("click", function (e) {
+          window.location.href = "../about"
+        });
+      }
+
+      let link3 = document.getElementById("link3");
+      if(link3) {
+        link3.addEventListener("click", function (e) {
+          window.location.href = "{% url 'map_view'%}"
+        });
+      }
+
+      let link4 = document.getElementById("link4");
+      if(link4) {
+        link4.addEventListener("click", function (e) {
+          window.location.href = "{% url 'map_view'%}"
+        });
+      }
+
+      let link5 = document.getElementById("link5");
+      if(link5) {
+        link5.addEventListener("click", function () {
+          window.open("https://www.yelp.com/writeareview");
+        });
+      }
+
+      let button100 = document.getElementById("button100");
+      if(button100) {
+        button100.addEventListener("click", function (e) {
+          window.location.href = "../login"
+        });
+      }
+
+      let button400 = document.getElementById("button400");
+      if(button400) {
+        button400.addEventListener("click", function (e) {
+          window.location.href = "../signup"
+        });
+      }
+
+      let menuItem = document.getElementById("menuItem");
+      if(menuItem) {
+        menuItem.addEventListener("click", function (e) {
+          window.location.href = "./Builder.html"
+        });
+      }
+
+      let menuItem1 = document.getElementById("menuItem1");
+      if(menuItem1) {
+        menuItem1.addEventListener("click", function (e) {
+          window.location.href = "./Builder.html"
+        });
+      }
+
+      let menuItem2 = document.getElementById("menuItem2");
+      if(menuItem2) {
+        menuItem2.addEventListener("click", function (e) {
+          window.location.href = "./Builder.html"
+        });
+      }
+
+      let menuItem3 = document.getElementById("menuItem3");
+      if(menuItem3) {
+        menuItem3.addEventListener("click", function (e) {
+          window.location.href = "./Builder.html"
+        });
+      }
+
+      let getInTouch = document.getElementById("getInTouch");
+      if(getInTouch) {
+        getInTouch.addEventListener("click", function (e) {
+          window.location.href = "{% url 'map_view'%}"
+        });
+      }
+    </script>
+  </body>
+</html>
